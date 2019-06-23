@@ -1,0 +1,10 @@
+.idea/
+.nyc_output/
+.vscode/
+coverage/
+src/
+dist/**/*.spec.js
+dist/**/*.test.js
+test/
+jest.config.js
+tsconfig.json

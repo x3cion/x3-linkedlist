@@ -1,5 +1,9 @@
-import LinkedListItem from "LinkedListItem";
+import LinkedListItem from "./LinkedListItem";
 
+/**
+ * Implements a linked list structure
+ * @typeparam T Type of values within this LinkedList
+ */
 export default class LinkedList<T> {
 	/**
 	 * First item in list

@@ -1,15 +1,17 @@
 {
   "name": "x3-node-template",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "engines": {
-    "node": ">=12"
+    "node": ">=8"
   },
-  "main": "dist/LinkedList.js",
+  "main": "./dist/LinkedList.js",
   "scripts": {
     "test": "jest --coverage",
     "build": "rimraf dist/ && tsc",
-    "watch": "rimraf dist/ && tsc -w"
+    "watch": "rimraf dist/ && tsc -w",
+    "doc": "rimraf docs/ && typedoc src/",
+    "prepublishOnly": "npm run build && npm run test && npm run doc"
   },
   "author": "x3cion",
   "license": "MIT",
@@ -20,6 +22,8 @@
     "jest-extended": "0.11.1",
     "ts-jest": "24.0.2",
     "tslint": "5.17.0",
+    "typedoc": "0.14.2",
+    "typedoc-plugin-markdown": "2.0.6",
     "typescript": "3.5.2",
     "rimraf": "2.6.3"
   },

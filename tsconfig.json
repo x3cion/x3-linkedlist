@@ -4,6 +4,8 @@
 		"target": "es2018",
 		"moduleResolution": "node",
 		"sourceMap": true,
+		"declaration": true,
+		"declarationDir": "dist/",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"removeComments": false,
@@ -30,5 +32,11 @@
 	"include": [
 		"src/**/*"
 	],
-	"compileOnSave": true
+	"compileOnSave": true,
+	"typedocOptions": {
+        "mode": "file",
+		"out": "docs",
+		"exclude": ["**/*.test.ts"],
+		"theme": "markdown"
+	},
 }

@@ -1,8 +1,8 @@
-> ## [x3-node-template](README.md)
+> ## [x3-linkedlist](README.md)
 
 [Globals](globals.md) /
 
-# x3-node-template
+# x3-linkedlist
 
 ### Index
 

@@ -1,4 +1,4 @@
-> ## [x3-node-template](../README.md)
+> ## [x3-linkedlist](../README.md)
 
 [Globals](../globals.md) / [LinkedListItem](linkedlistitem.md) /
 
@@ -37,7 +37,7 @@
 
 \+ **new LinkedListItem**(`value`: `T`, `unlinkCleanup?`: undefined | function): *[LinkedListItem](linkedlistitem.md)*
 
-*Defined in [LinkedListItem.ts:5](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L5)*
+*Defined in [LinkedListItem.ts:5](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L5)*
 
 **Parameters:**
 
@@ -56,7 +56,7 @@ ___
 
 ● **before**: *[LinkedListItem](linkedlistitem.md)‹*`T`*› | undefined*
 
-*Defined in [LinkedListItem.ts:5](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L5)*
+*Defined in [LinkedListItem.ts:5](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L5)*
 
 ___
 
@@ -64,7 +64,7 @@ ___
 
 ● **behind**: *[LinkedListItem](linkedlistitem.md)‹*`T`*› | undefined*
 
-*Defined in [LinkedListItem.ts:4](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L4)*
+*Defined in [LinkedListItem.ts:4](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L4)*
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 ● **unlinkCleanup**? : *undefined | function*
 
-*Defined in [LinkedListItem.ts:7](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L7)*
+*Defined in [LinkedListItem.ts:7](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L7)*
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 ● **value**: *`T`*
 
-*Defined in [LinkedListItem.ts:7](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L7)*
+*Defined in [LinkedListItem.ts:7](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L7)*
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 ▸ **insertBefore**(`before`: [LinkedListItem](linkedlistitem.md)‹*`T`*›): *void*
 
-*Defined in [LinkedListItem.ts:10](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L10)*
+*Defined in [LinkedListItem.ts:10](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L10)*
 
 **Parameters:**
 
@@ -106,7 +106,7 @@ ___
 
 ▸ **insertBehind**(`item`: [LinkedListItem](linkedlistitem.md)‹*`T`*›): *void*
 
-*Defined in [LinkedListItem.ts:15](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L15)*
+*Defined in [LinkedListItem.ts:15](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L15)*
 
 **Parameters:**
 
@@ -122,7 +122,7 @@ ___
 
 ▸ **unlink**(): *void*
 
-*Defined in [LinkedListItem.ts:29](https://github.com/x3cion/x3-linkedlist/blob/68a5f8b/src/LinkedListItem.ts#L29)*
+*Defined in [LinkedListItem.ts:29](https://github.com/x3cion/x3-linkedlist/blob/94c99a3/src/LinkedListItem.ts#L29)*
 
 **Returns:** *void*
 

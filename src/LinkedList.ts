@@ -19,9 +19,10 @@ export default class LinkedList<T> {
 	constructor(values?: Iterable<T> | LinkedList<any>) {
 		if (values) {
 			if (values instanceof LinkedList) {
-				this.push(...values.values());
-			} else {
-				this.push(...values);
+				values = values.values();
+			}
+			for(const value of values) {
+				this.push(value);
 			}
 		}
 	}

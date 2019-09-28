@@ -8,5 +8,9 @@ docs/
 src/
 test/
 .gitignore
+.npmignore
+.prettierignore
+.prettierrc
 jest.config.js
 tsconfig.json
+tslint.json

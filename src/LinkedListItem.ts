@@ -32,14 +32,13 @@ export class LinkedListItem<T> {
    * If there's already a LinkedListItem linked behind, it will be relinked accordingly
    * @param item LinkListItem to be inserted behind this one
    */
-  public insertBehind(item: LinkedListItem<T>) {
+  public insertBehind(item: LinkedListItem<T>): void {
     item.insertBefore(this);
 
     if (this.behind) {
       let itemChainEnd = item;
-      while (itemChainEnd.behind) {
-        itemChainEnd = itemChainEnd.behind;
-      }
+      while (itemChainEnd.behind) itemChainEnd = itemChainEnd.behind;
+
       this.behind.insertBefore(itemChainEnd);
       itemChainEnd.insertBehind(this.behind);
     }
@@ -50,10 +49,9 @@ export class LinkedListItem<T> {
    * Unlinks this LinkedListItem and calls unlinkCleanup
    * @see LinkedListItem#unlinkCleanup
    */
-  public unlink() {
-    if (this.before) {
-      this.before.behind = this.behind;
-    }
+  public unlink(): void {
+    if (this.before) this.before.behind = this.behind;
+
     if (this.behind) {
       this.behind.before = this.before;
     }
@@ -71,7 +69,7 @@ export class LinkedListItem<T> {
    * @param before
    * @see insertBehind
    */
-  protected insertBefore(before: LinkedListItem<T>) {
+  protected insertBefore(before: LinkedListItem<T>): void {
     this.before = before;
     if (!this.unlinkCleanup) {
       this.unlinkCleanup = before.unlinkCleanup;

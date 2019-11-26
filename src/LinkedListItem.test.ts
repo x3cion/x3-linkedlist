@@ -1,6 +1,5 @@
-import 'jest-extended';
-
-import { LinkedListItem } from 'LinkedListItem';
+import { LinkedListItem } from "./LinkedListItem";
+type GuranteedBehindLinkedListItem<T> = LinkedListItem<T> & { behind: GuranteedBehindLinkedListItem<number> };
 
 describe("LinkedListItem#constructor", () => {
   test("holds given value", () => {
@@ -10,20 +9,20 @@ describe("LinkedListItem#constructor", () => {
 
   test("calls given unlinkCleanup function if given", () => {
     let called = false;
-    const item = new LinkedListItem(1, () => {
+    const item = new LinkedListItem(1, (): void => {
       called = true;
     });
 
-    expect(called).toBeFalse();
+    expect(called).toBe(false);
     item.unlink();
-    expect(called).toBeTrue();
+    expect(called).toBe(true);
   });
 });
 
 describe("LinkedListItem#insertBehind", () => {
   test("inserts given LinkedListItem behind this", () => {
     const itemBefore = new LinkedListItem(0);
-    const baseItem = new LinkedListItem(1);
+    const baseItem = new LinkedListItem(1) as GuranteedBehindLinkedListItem<number>;
     itemBefore.insertBehind(baseItem);
 
     expect(itemBefore.behind).toBe(baseItem);
@@ -39,11 +38,11 @@ describe("LinkedListItem#insertBehind", () => {
 
     expect(baseItem.behind).toBe(newItemBehind);
 
-    expect(baseItem.behind!.behind).toBe(itemBehind);
+    expect(baseItem.behind.behind).toBe(itemBehind);
   });
 
   test("Adds multiple in a row", () => {
-    const item1 = new LinkedListItem(1);
+    const item1 = new LinkedListItem(1) as GuranteedBehindLinkedListItem<number>;
     const item2 = new LinkedListItem(2);
     const item3 = new LinkedListItem(3);
     const item21 = new LinkedListItem(4);
@@ -60,7 +59,7 @@ describe("LinkedListItem#insertBehind", () => {
 
     const expectedResult = [1, 2, 4, 5, 6, 3];
     const result = [];
-    let current: any = item1;
+    let current = item1;
     do {
       result.push(current.value);
       current = current.behind;
@@ -89,14 +88,14 @@ describe("LinkedListItem#unlink", () => {
 
   test("runs given unlinkCleanup function", () => {
     let called = false;
-    const item1 = new LinkedListItem(1, () => {
+    const item1 = new LinkedListItem(1, (): void => {
       called = true;
     });
 
-    expect(called).toBeFalse();
+    expect(called).toBe(false);
 
     item1.unlink();
 
-    expect(called).toBeTrue();
+    expect(called).toBe(true);
   });
 });

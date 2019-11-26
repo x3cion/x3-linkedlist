@@ -40,7 +40,7 @@ Theirfor, to add one before, before has to add one behind.
 
 \+ **new LinkedListItem**(`value`: T, `unlinkCleanup?`: undefined | function): *[LinkedListItem](linkedlistitem.md)*
 
-*Defined in [LinkedListItem.ts:20](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L20)*
+*Defined in [LinkedListItem.ts:20](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L20)*
 
 **Parameters:**
 
@@ -57,7 +57,7 @@ Name | Type |
 
 • **before**: *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedListItem.ts:20](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L20)*
+*Defined in [LinkedListItem.ts:20](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L20)*
 
 Item before this item
 A -> ThisItem -> C
@@ -69,7 +69,7 @@ ___
 
 • **behind**: *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedListItem.ts:13](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L13)*
+*Defined in [LinkedListItem.ts:13](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L13)*
 
 Item behind this item
 A -> ThisItem -> C
@@ -81,7 +81,7 @@ ___
 
 • **unlinkCleanup**? : *undefined | function*
 
-*Defined in [LinkedListItem.ts:27](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L27)*
+*Defined in [LinkedListItem.ts:27](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L27)*
 
 Called on unlink. Usually used by LinkedList to fix first and last pointers and reduce length.
 
@@ -91,7 +91,7 @@ ___
 
 • **value**: *T*
 
-*Defined in [LinkedListItem.ts:23](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L23)*
+*Defined in [LinkedListItem.ts:23](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L23)*
 
 ## Methods
 
@@ -99,7 +99,7 @@ ___
 
 ▸ **insertBefore**(`before`: [LinkedListItem](linkedlistitem.md)‹T›): *void*
 
-*Defined in [LinkedListItem.ts:72](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L72)*
+*Defined in [LinkedListItem.ts:72](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L72)*
 
 Item given will be inserted before this item.
 unlinkCleanup will be copied if neccessary.
@@ -121,7 +121,7 @@ ___
 
 ▸ **insertBehind**(`item`: [LinkedListItem](linkedlistitem.md)‹T›): *void*
 
-*Defined in [LinkedListItem.ts:35](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L35)*
+*Defined in [LinkedListItem.ts:35](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L35)*
 
 This will link given LinkListItem behind this item.
 If there's already a LinkedListItem linked behind, it will be relinked accordingly
@@ -140,7 +140,7 @@ ___
 
 ▸ **unlink**(): *void*
 
-*Defined in [LinkedListItem.ts:52](https://github.com/x3cion/x3-linkedlist/blob/bff069f/src/LinkedListItem.ts#L52)*
+*Defined in [LinkedListItem.ts:52](https://github.com/x3cion/x3-linkedlist/blob/3dd1f0c/src/LinkedListItem.ts#L52)*
 
 Unlinks this LinkedListItem and calls unlinkCleanup
 

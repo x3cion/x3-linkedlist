@@ -1,7 +1,5 @@
-import 'jest-extended';
-
-import { LinkedList } from './LinkedList';
-import { LinkedListItem } from './LinkedListItem';
+import { LinkedList } from "./LinkedList";
+import { LinkedListItem } from "./LinkedListItem";
 
 /**
  * Returns a LinkedList, the corresponding LinkedListItem's and an array of every value
@@ -10,7 +8,7 @@ import { LinkedListItem } from './LinkedListItem';
  */
 function getListWithItems(
   count: number,
-  offset: number = 0
+  offset = 0
 ): {
   list: LinkedList<string>;
   items: Array<LinkedListItem<string>>;
@@ -34,65 +32,65 @@ function getListWithItems(
   };
 }
 
+type GuaranteedNonEmptyLinkedList<T> = LinkedList<T> & {
+  first: LinkedListItem<T>;
+  last: LinkedListItem<T>;
+};
+
+type NonEmptyGetList = ReturnType<typeof getListWithItems> & {
+  list: GuaranteedNonEmptyLinkedList<string>;
+};
+
 /**
  * Returns a value at given index position in given LinkedList
  * @param list Linkedlist to be traversed
  * @param index Index of entry to be returned
  */
-function getValueOnIndex(list: LinkedList<string>, index: number): string {
+function getValueOnIndex<T>(list: LinkedList<T>, index: number): T {
   let current = list.first;
-  while (index--) {
-    current = current!.behind;
-  }
+  while (current && index--) current = current.behind;
+
   if (!current) {
     throw new Error("Index number yields no entry!");
   }
   return current && current.value;
 }
 
-interface ICallbackBasedFunctionReturningObject {
-  [key: string]: (callback: (...args: any[]) => any, thisArg?: any) => any;
-}
-
-function getCallbackThisArgTest<
-  K extends keyof Pick<
-    LinkedList<string>,
-    "every" | "filter" | "find" | "findItem" | "forEach" | "map" | "some"
-  >
->(targetedFunction: K): () => void {
-  return () => {
-    const { list, items, values } = getListWithItems(1);
+function getCallbackThisArgTest<K extends keyof Pick<LinkedList<string>, "every" | "some" | "filter" | "find" | "findItem" | "forEach" | "map">>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  targetedFunction: K
+): () => void {
+  return (): void => {
+    const { list } = getListWithItems(1);
 
     const newThis1 = { testvalue: 1 };
     let callbackBeenCalled1 = false;
-    list[targetedFunction](function(
-      this: typeof newThis1,
-      ...args: any[]
-    ): any {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    type Any = any;
+    (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function(this: typeof newThis1): void {
       callbackBeenCalled1 = true;
       expect(this).toBe(newThis1);
-    },
-    newThis1);
+      return;
+    }, newThis1);
 
-    expect(callbackBeenCalled1).toBeTrue();
+    expect(callbackBeenCalled1).toBe(true);
 
     const newThis2 = -1;
     let callbackBeenCalled2 = false;
-    list[targetedFunction](function(this: any, ...args: any[]): any {
+    (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function(this: typeof newThis2): void {
       callbackBeenCalled2 = true;
       expect(this).toBe(newThis2);
+      return;
     }, newThis2);
 
-    expect(callbackBeenCalled2).toBeTrue();
+    expect(callbackBeenCalled2).toBe(true);
   };
 }
 
 describe("Helper functions are working", () => {
   test("getListWithItems returns valid pairs of list, items and values", () => {
     const consistentLength = 7;
-    const { list, items, values: givenValues } = getListWithItems(
-      consistentLength
-    );
+    const { list, items, values: givenValues } = getListWithItems(consistentLength);
     const expectedValues = ["0", "1", "2", "3", "4", "5", "6"];
 
     expect(expectedValues.length).toBe(consistentLength);
@@ -100,11 +98,9 @@ describe("Helper functions are working", () => {
     expect(givenValues.length).toBe(consistentLength);
     expect(list.length).toBe(consistentLength);
 
-    expect(
-      expectedValues.every(value => expectedValues.includes(value))
-    ).toBeTrue();
-    expect(items.every(item => expectedValues.includes(item.value))).toBeTrue();
-    expect(list.every(value => expectedValues.includes(value))).toBeTrue();
+    expect(expectedValues.every(value => expectedValues.includes(value))).toBe(true);
+    expect(items.every(item => expectedValues.includes(item.value))).toBe(true);
+    expect(list.every(value => expectedValues.includes(value))).toBe(true);
   });
 
   test("getValueOnIndex returns the right value for given index", () => {
@@ -114,16 +110,11 @@ describe("Helper functions are working", () => {
       expect(getValueOnIndex(list, i)).toBe(values[i]);
     }
   });
-
-  // test("getCallbackThisArgTest returns a test function", () => {
-  // 	const testFunction = getCallbackThisArgTest("every");
-  // 	expect(testFunction).toBeFunction();
-  // })
 });
 
 describe("LinkedList#constructor", () => {
   test("creates new LinkedList on call", () => {
-    const list = new LinkedList<any>();
+    const list = new LinkedList<number>();
     expect(list).toBeInstanceOf(LinkedList);
     expect(list.length).toBe(0);
     expect(list.first).toBeUndefined();
@@ -139,110 +130,115 @@ describe("LinkedList#constructor", () => {
 
 describe("LinkedList#every", () => {
   test("iterates for every element as long as a truthy value is returned", () => {
-    const { list, items, values } = getListWithItems(3);
+    const { list } = getListWithItems(3);
     let count = 0;
-    const fncReturn = list.every(value => ++count);
+    const fncReturn = list.every(() => !!++count);
     expect(count).toBe(3);
-    expect(fncReturn).toBeTrue();
+    expect(fncReturn).toBe(true);
   });
 
   test("breaks on any falsy return", () => {
-    const { list, items, values } = getListWithItems(3);
+    const { list } = getListWithItems(3);
     let countdown = 2;
     let count = 0;
 
-    const fncReturn = list.every(value => ++count && --countdown);
+    const fncReturn = list.every(() => !!++count && !!--countdown);
     expect(count).toBe(2);
     expect(fncReturn).toBe(false);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("every"));
 });
 
 describe("LinkedList#filter", () => {
   test("returns only values for which callback returns truthy", () => {
-    const { list, items, values } = getListWithItems(10);
+    const { list, items } = getListWithItems(10);
     const allowedItems = new Set(["1", "2", "5", "7"]);
 
     const filteredList = list.filter((value, item, innerList) => {
-      expect(items.includes(item)).toBeTrue();
+      expect(items.includes(item)).toBe(true);
       expect(innerList).toBe(list);
       return allowedItems.has(value);
     });
 
     const filteredValues = [...filteredList.values()];
     expect(filteredValues.length).toBe(allowedItems.size);
-    expect(filteredValues.every(value => allowedItems.has(value)));
+    expect(filteredValues.every(value => allowedItems.has(value))).toBe(true);
   });
 
   test("returns empty LinkedList if callback never was truthy", () => {
-    const { list, items, values } = getListWithItems(3);
+    const { list } = getListWithItems(3);
     const filteredList = list.filter(() => false);
     expect(filteredList.length).toBe(0);
   });
 
   test("returns empty LinkedList for empty LinkedList", () => {
-    const { list, items, values } = getListWithItems(0);
+    const { list } = getListWithItems(0);
     const filteredList = list.filter(() => true);
     expect(filteredList.length).toBe(0);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("filter"));
 });
 
 describe("LinkedList#find", () => {
   test("finds in LinkedList", () => {
-    const { list, items, values } = getListWithItems(5);
+    const { list } = getListWithItems(5);
     const found = list.find(value => value === "3");
 
     expect(found).toBe("3");
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("find"));
 });
 
 describe("LinkedList#findItem", () => {
   test("finds in LinkedList", () => {
-    const { list, items, values } = getListWithItems(7);
+    const { list, items } = getListWithItems(7);
     const foundItem = list.findItem(value => value === "6");
 
     expect(foundItem).toBe(items[6]);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("findItem"));
 });
 
 describe("LinkedList#forEach", () => {
   test("runs function for each element", () => {
-    const { list, items, values } = getListWithItems(4);
+    const { list, values } = getListWithItems(4);
 
     const forEachResponses = [true, false, {}, 5];
     let forEachRun = 0;
     list.forEach(value => {
       forEachRun++;
-      expect(values.includes(value)).toBeTrue();
+      expect(values.includes(value)).toBe(true);
       return forEachResponses[forEachRun];
     });
 
     expect(forEachRun).toBe(4);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("forEach"));
 });
 
 describe("LinkedList#includes", () => {
   test("returns true on found element", () => {
     const { list } = getListWithItems(5);
-    expect(list.includes("3")).toBeTrue();
+    expect(list.includes("3")).toBe(true);
   });
   test("returns false if element is not found", () => {
     const { list } = getListWithItems(5);
-    expect(list.includes("5")).toBeFalse();
+    expect(list.includes("5")).toBe(false);
   });
 
   test("returns false on empty list", () => {
     const { list } = getListWithItems(0);
-    expect(list.includes("0")).toBeFalse();
+    expect(list.includes("0")).toBe(false);
   });
 });
 
@@ -254,7 +250,7 @@ describe("LinkedLIst#itemOf", () => {
   });
 
   test("returns first item found", () => {
-    const { list, items } = getListWithItems(5);
+    const { list } = getListWithItems(5);
     list.push("0");
     const item = list.itemOf("0");
     expect(item).toBe(list.first);
@@ -278,7 +274,7 @@ describe("LinkedList#lastItemOf", () => {
   });
 
   test("returns first item found", () => {
-    const { list, items } = getListWithItems(5);
+    const { list } = getListWithItems(5);
     list.push("0");
     const item = list.lastItemOf("0");
     expect(item).toBe(list.last);
@@ -300,7 +296,7 @@ describe("LinkedList#map", () => {
     const expectedOutput = [1, 2, 3, 4];
     const output = list.map(value => parseInt(value, 10) + 1);
     expect(output.length).toBe(4);
-    expect(output.every(value => expectedOutput.includes(value))).toBeTrue();
+    expect(output.every(value => expectedOutput.includes(value))).toBe(true);
   });
 
   test("passes items and list as second and third argument", () => {
@@ -308,7 +304,7 @@ describe("LinkedList#map", () => {
     let iterationCount = 0;
     list.map((_, item, listParameter) => {
       iterationCount++;
-      expect(items.includes(item)).toBeTrue();
+      expect(items.includes(item)).toBe(true);
       expect(listParameter).toBe(list);
     });
 
@@ -318,14 +314,15 @@ describe("LinkedList#map", () => {
   test("returns empty list for lists and doesn't run callback", () => {
     const { list } = getListWithItems(0);
     let callbackRun = false;
-    const newList = list.map(value => {
+    const newList = list.map(() => {
       callbackRun = true;
     });
 
     expect(newList.length).toBe(0);
-    expect(callbackRun).toBeFalse();
+    expect(callbackRun).toBe(false);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("map"));
 });
 
@@ -341,10 +338,7 @@ describe("LinkedList#reduce", () => {
 
   test("works with given initialValue", () => {
     const { list } = getListWithItems(3, 1);
-    const finalValue = list.reduce(
-      (acc, value) => acc + parseInt(value, 10),
-      -100
-    );
+    const finalValue = list.reduce((acc, value) => acc + parseInt(value, 10), -100);
     expect(finalValue).toBe(-94);
   });
 
@@ -358,13 +352,14 @@ describe("LinkedList#reduce", () => {
   });
 
   test("with empty LinkedList and initialValue, return initialValue", () => {
-    const list = new LinkedList<any>();
+    const list = new LinkedList<string>();
     let callbackCalled = false;
-    const output = list.reduce<any>(() => {
+    const output = list.reduce<string>(() => {
       callbackCalled = true;
+      return "newValue";
     }, "initialValue");
 
-    expect(callbackCalled).toBeFalse();
+    expect(callbackCalled).toBe(false);
     expect(output).toBe("initialValue");
   });
 
@@ -409,13 +404,14 @@ describe("LinkedList#reduceRight", () => {
   });
 
   test("with empty LinkedList and initialValue, return initialValue", () => {
-    const list = new LinkedList<any>();
+    const list = new LinkedList<string>();
     let callbackCalled = false;
-    const output = list.reduceRight<any>(() => {
+    const output = list.reduceRight<string>(() => {
       callbackCalled = true;
+      return "newValue";
     }, "initialValue");
 
-    expect(callbackCalled).toBeFalse();
+    expect(callbackCalled).toBe(false);
     expect(output).toBe("initialValue");
   });
 
@@ -433,7 +429,7 @@ describe("LinkedList#reduceRight", () => {
 
 describe("LinkedList#some", () => {
   test("breaks as soon as a value has been found", () => {
-    const { list, items, values } = getListWithItems(4);
+    const { list } = getListWithItems(4);
     let iterationCount = 0;
     const returnedValue = list.some(value => {
       iterationCount++;
@@ -441,7 +437,7 @@ describe("LinkedList#some", () => {
     });
 
     expect(iterationCount).toBe(3);
-    expect(returnedValue).toBeTrue();
+    expect(returnedValue).toBe(true);
   });
 
   test("doesn't break if no value could be found", () => {
@@ -454,22 +450,23 @@ describe("LinkedList#some", () => {
     });
 
     expect(iterationCount).toBe(5);
-    expect(returnedValue).toBeFalse();
+    expect(returnedValue).toBe(false);
   });
 
   test("always false for empty LinkedList", () => {
     const list = new LinkedList<string>();
     let iterationCount = 0;
 
-    const returnedValue = list.some(value => {
+    const returnedValue = list.some(() => {
       iterationCount++;
       return true;
     });
 
     expect(iterationCount).toBe(0);
-    expect(returnedValue).toBeFalse();
+    expect(returnedValue).toBe(false);
   });
 
+  // eslint-disable-next-line jest/expect-expect
   test("set callback-this correctly", getCallbackThisArgTest("some"));
 });
 
@@ -491,47 +488,45 @@ describe("LinkedList#join", () => {
 
 describe("LinkedList#concat", () => {
   test("joins pure LinkedList's together", () => {
-    const { list: list1, items: items1 } = getListWithItems(2);
-    const { list: list2, items: items2 } = getListWithItems(2, 10);
-    const { list: list3, items: items3 } = getListWithItems(2, 20);
+    const { list: list1 }: NonEmptyGetList = getListWithItems(2) as NonEmptyGetList;
+    const { list: list2 } = getListWithItems(2, 10) as NonEmptyGetList;
+    const { list: list3, items: items3 } = getListWithItems(2, 20) as NonEmptyGetList;
 
-    const joinedList1 = list1.concat(list2, list3);
+    const joinedList1: GuaranteedNonEmptyLinkedList<string> = list1.concat(list2, list3) as GuaranteedNonEmptyLinkedList<string>;
     // if(!joinedList1.first || !joinedList1.last) {
-    // 	return expect(true).toBeFalse();
+    // 	return expect(true).toBe(false);
     // }
 
     for (const list of [list1, list2, list3]) {
       for (const value of list.values()) {
-        expect(joinedList1.includes(value)).toBeTrue();
+        expect(joinedList1.includes(value)).toBe(true);
       }
     }
 
     for (const value of joinedList1.values()) {
-      expect(
-        list1.includes(value) || list2.includes(value) || list3.includes(value)
-      ).toBeTrue();
+      expect(list1.includes(value) || list2.includes(value) || list3.includes(value)).toBe(true);
     }
 
     // The first element of the joined list holds the value of the first element of the first list
-    expect(joinedList1.first!.value).toBe(list1.first!.value);
+    expect(joinedList1.first.value).toBe(list1.first.value);
 
     // the last element of the joined list holds the value of the last element of the third list
-    expect(joinedList1.last!.value).toBe(list3.last!.value);
+    expect((joinedList1.last as LinkedListItem<string>).value).toBe((list3.last as LinkedListItem<string>).value);
 
     // Includes 11, which is the second element from the second list
-    expect(joinedList1.includes("11")).toBeTrue();
+    expect(joinedList1.includes("11")).toBe(true);
 
     // Includes value of the first item of the third list
     expect(getValueOnIndex(joinedList1, 4)).toBe(items3[0].value);
 
-    const joinedList2 = list1.concat(list2).concat(list3);
+    const joinedList2: GuaranteedNonEmptyLinkedList<string> = list1.concat(list2).concat(list3) as GuaranteedNonEmptyLinkedList<string>;
 
-    let current1 = joinedList1.first;
-    let current2 = joinedList2.first;
+    let current1: LinkedListItem<string> | undefined = joinedList1.first;
+    let current2: LinkedListItem<string> | undefined = joinedList2.first;
     do {
-      expect(current1!.value).toBe(current2!.value);
-      current1 = current1!.behind;
-      current2 = current2!.behind;
+      expect(current1.value).toBe(current2.value);
+      current1 = current1.behind;
+      current2 = current2.behind;
     } while (current1 && current2);
 
     // Expect both to be undefined
@@ -547,11 +542,11 @@ describe("LinkedList#concat", () => {
 
     let current = joinedList.first;
 
-    do {
-      expect(items1.includes(current!)).toBe(false);
-      expect(items2.includes(current!)).toBe(false);
-      current = current!.behind;
-    } while (current);
+    while (current) {
+      expect(items1.includes(current)).toBe(false);
+      expect(items2.includes(current)).toBe(false);
+      current = current.behind;
+    }
   });
 
   test("joins abitrary items together", () => {
@@ -559,15 +554,9 @@ describe("LinkedList#concat", () => {
     const { list: list2, items: items2 } = getListWithItems(2, 10);
     const stringValue = "abc";
     const objectValue = { a: 1 };
-    const arrayValue: any[] = [null];
+    const arrayValue: null[] = [null];
 
-    const joinedList = list1.concat<any>(
-      stringValue,
-      list2,
-      objectValue,
-      arrayValue,
-      list1
-    );
+    const joinedList = list1.concat<string | object | null>(stringValue, list2, objectValue, arrayValue, list1);
     expect(getValueOnIndex(joinedList, 4)).toBe(items2[1].value);
     expect(getValueOnIndex(joinedList, 5)).toBe(objectValue);
     expect(getValueOnIndex(joinedList, 8)).toBe(items1[1].value);
@@ -615,27 +604,27 @@ describe("LinkedList#push", () => {
     emptyList.push("anything");
     expect(emptyList.first).toBe(emptyList.last);
     expect(emptyList.length).toBe(1);
-    expect(emptyList.first!.value).toBe("anything");
+    expect((emptyList as GuaranteedNonEmptyLinkedList<string>).first.value).toBe("anything");
 
-    const list = new LinkedList([1, 2, 3]);
+    const list = new LinkedList([1, 2, 3]) as GuaranteedNonEmptyLinkedList<number>;
     list.push(-1);
-    expect(list.last!.value).toBe(-1);
+    expect(list.last.value).toBe(-1);
     expect(list.length).toBe(4);
   });
 });
 
 describe("LinkedList#unshift", () => {
   test("adds element to the beginning of the LinkedList", () => {
-    const emptyList = new LinkedList();
+    const emptyList = new LinkedList<string>();
 
     emptyList.unshift("anything");
     expect(emptyList.first).toBe(emptyList.last);
     expect(emptyList.length).toBe(1);
-    expect(emptyList.last!.value).toBe("anything");
+    expect((emptyList as GuaranteedNonEmptyLinkedList<string>).last.value).toBe("anything");
 
-    const list = new LinkedList([1, 2, 3]);
+    const list = new LinkedList([1, 2, 3]) as GuaranteedNonEmptyLinkedList<number>;
     list.unshift(-1);
-    expect(list.first!.value).toBe(-1);
+    expect(list.first.value).toBe(-1);
     expect(list.length).toBe(4);
   });
 });
@@ -644,7 +633,7 @@ describe("LikedList#remove", () => {
   test("removes a value from LinkedList", () => {
     const list = new LinkedList([3, 4, 5, 3]);
     const returnedValue = list.remove(3);
-    expect(returnedValue).toBeTrue();
+    expect(returnedValue).toBe(true);
     expect(list.length).toBe(3);
     expect([...list.values()]).toStrictEqual([4, 5, 3]);
   });
@@ -652,7 +641,7 @@ describe("LikedList#remove", () => {
   test("removes nothing if value could not be found", () => {
     const list = new LinkedList([4, 5, 6]);
     const returnedValue = list.remove(7);
-    expect(returnedValue).toBeFalse();
+    expect(returnedValue).toBe(false);
     expect(list.length).toBe(3);
     expect([...list.values()]).toStrictEqual([4, 5, 6]);
   });
@@ -662,7 +651,7 @@ describe("LinkedList#removeAllOccurrences", () => {
   test("removes a value from LinkedList", () => {
     const list = new LinkedList([3, 4, 5, 3]);
     const returnedValue = list.removeAllOccurrences(3);
-    expect(returnedValue).toBeTrue();
+    expect(returnedValue).toBe(true);
     expect(list.length).toBe(2);
     expect([...list.values()]).toStrictEqual([4, 5]);
   });
@@ -670,7 +659,7 @@ describe("LinkedList#removeAllOccurrences", () => {
   test("removes nothing if value could not be found", () => {
     const list = new LinkedList([4, 5, 6]);
     const returnedValue = list.removeAllOccurrences(7);
-    expect(returnedValue).toBeFalse();
+    expect(returnedValue).toBe(false);
     expect(list.length).toBe(3);
     expect([...list.values()]).toStrictEqual([4, 5, 6]);
   });
@@ -683,22 +672,14 @@ describe("LinkedList#entries,[Symbol.iterator]", () => {
     const entriesResponse = [...list.entries()];
 
     expect(iteratorResponse.length).toBe(4);
-    expect(
-      iteratorResponse.every(
-        ([item, value]) => items.includes(item) && values.includes(value)
-      )
-    ).toBeTrue();
+    expect(iteratorResponse.every(([item, value]) => items.includes(item) && values.includes(value))).toBe(true);
 
     expect(entriesResponse.length).toBe(4);
-    expect(
-      entriesResponse.every(
-        ([item, value]) => items.includes(item) && values.includes(value)
-      )
-    ).toBeTrue();
+    expect(entriesResponse.every(([item, value]) => items.includes(item) && values.includes(value))).toBe(true);
   });
 
   test("returns nothing if list is empty", () => {
-    const { list, items, values } = getListWithItems(0);
+    const { list } = getListWithItems(0);
     const iteratorResponse = [...list[Symbol.iterator]()];
     const entriesResponse = [...list.entries()];
 
@@ -709,15 +690,15 @@ describe("LinkedList#entries,[Symbol.iterator]", () => {
 
 describe("LinkedList#keys", () => {
   test("returns exactly the content of the list", () => {
-    const { list, items, values } = getListWithItems(4);
+    const { list, items } = getListWithItems(4);
     const keyResponse = [...list.keys()];
 
     expect(keyResponse.length).toBe(4);
-    expect(keyResponse.every(item => items.includes(item))).toBeTrue();
+    expect(keyResponse.every(item => items.includes(item))).toBe(true);
   });
 
   test("returns nothing if list is empty", () => {
-    const { list, items, values } = getListWithItems(0);
+    const { list } = getListWithItems(0);
     const keyResponse = [...list.keys()];
 
     expect(keyResponse.length).toBe(0);
@@ -726,15 +707,15 @@ describe("LinkedList#keys", () => {
 
 describe("LinkedList#values", () => {
   test("returns exactly the content of the list", () => {
-    const { list, items, values } = getListWithItems(4);
+    const { list, values } = getListWithItems(4);
 
     const valuesResponse = [...list.values()];
     expect(valuesResponse.length).toBe(4);
-    expect(valuesResponse.every(value => values.includes(value))).toBeTrue();
+    expect(valuesResponse.every(value => values.includes(value))).toBe(true);
   });
 
   test("returns nothing if list is empty", () => {
-    const { list, items, values } = getListWithItems(0);
+    const { list } = getListWithItems(0);
     const valuesResponse = [...list.values()];
 
     expect(valuesResponse.length).toBe(0);

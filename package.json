@@ -1,6 +1,6 @@
 {
   "name": "x3-linkedlist",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A doubly linked list implementation",
   "engines": {
     "node": ">=8"
@@ -24,27 +24,31 @@
     "doublelinked"
   ],
   "scripts": {
-    "lint": "tslint -p .",
+    "full": "npm run lint && npm run build && npm run test && npm run doc",
+    "lint": "eslint .",
     "test": "jest --coverage",
-    "build": "rimraf dist/ && tsc",
-    "watch": "rimraf dist/ && tsc -w",
+    "build": "rimraf dist/ && tsc -p tsconfig.compile.json",
+    "watch": "rimraf dist/ && tsc -p tsconfig.compile.json -w",
     "doc": "rimraf docs/typedoc && typedoc src/",
-    "prepublishOnly": "npm run lint && npm run build && npm run test && npm run doc"
+    "prepublishOnly": "npm run full"
   },
   "author": "Benno Dreißig",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "24.0.18",
+    "@types/jest": "24.0.*",
     "@types/node": "8.*",
+    "@typescript-eslint/eslint-plugin": "2.9.*",
+    "@typescript-eslint/parser": "2.9.*",
+    "eslint": "6.5.*",
+    "eslint-config-prettier": "6.7.*",
+    "eslint-plugin-jest": "23.0.*",
+    "eslint-plugin-prettier": "3.1.*",
     "jest": "24.9.0",
-    "jest-extended": "0.11.2",
-    "ts-jest": "24.1.0",
-    "tslint": "5.20.0",
-    "tslint-config-prettier": "1.18.0",
-    "typedoc": "0.15.0",
-    "typedoc-plugin-markdown": "2.2.7",
-    "typescript": "3.6.3",
-    "rimraf": "3.0.0"
-  },
-  "dependencies": {}
+    "prettier": "1.19.*",
+    "rimraf": "3.0.0",
+    "ts-jest": "24.2.*",
+    "typedoc": "0.15.*",
+    "typedoc-plugin-markdown": "2.2.*",
+    "typescript": "3.7.*"
+  }
 }

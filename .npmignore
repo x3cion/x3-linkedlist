@@ -6,7 +6,6 @@
 coverage/
 dist/**/*.spec.js
 dist/**/*.test.js
-docs/
 src/
 test/
 .eslintignore

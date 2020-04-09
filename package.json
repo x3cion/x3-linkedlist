@@ -2,19 +2,6 @@
   "name": "x3-linkedlist",
   "version": "1.1.0",
   "description": "A doubly linked list implementation",
-  "engines": {
-    "node": ">=8"
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "homepage": "https://github.com/x3cion/x3-linkedlist",
-  "bugs": {
-    "url": "https://github.com/x3cion/x3-linkedlist/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/x3cion/x3-linkedlist.git"
-  },
   "keywords": [
     "linkedlist",
     "array",
@@ -23,32 +10,46 @@
     "linked",
     "doublelinked"
   ],
-  "scripts": {
-    "full": "npm run lint && npm run build && npm run test && npm run doc",
-    "lint": "eslint .",
-    "test": "jest --coverage",
-    "build": "rimraf dist/ && tsc -p tsconfig.compile.json",
-    "watch": "rimraf dist/ && tsc -p tsconfig.compile.json -w",
-    "doc": "rimraf docs/typedoc && typedoc src/",
-    "prepublishOnly": "npm run full"
+  "homepage": "https://github.com/x3cion/x3-linkedlist",
+  "bugs": {
+    "url": "https://github.com/x3cion/x3-linkedlist/issues"
   },
-  "author": "Benno Dreißig",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x3cion/x3-linkedlist.git"
+  },
   "license": "MIT",
+  "author": "Benno Dreißig",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist/ && tsc -p tsconfig.compile.json",
+    "doc": "rimraf docs/typedoc && typedoc src/",
+    "full": "npm run lint && npm run build && npm run test && npm run doc",
+    "lint": "eslint --fix **/*",
+    "prepublishOnly": "npm run full",
+    "test": "jest --coverage",
+    "watch": "rimraf dist/ && tsc -p tsconfig.compile.json -w"
+  },
   "devDependencies": {
-    "@types/jest": "24.0.*",
-    "@types/node": "8.*",
-    "@typescript-eslint/eslint-plugin": "2.9.*",
-    "@typescript-eslint/parser": "2.9.*",
-    "eslint": "6.5.*",
-    "eslint-config-prettier": "6.7.*",
-    "eslint-plugin-jest": "23.0.*",
-    "eslint-plugin-prettier": "3.1.*",
-    "jest": "24.9.0",
-    "prettier": "1.19.*",
-    "rimraf": "3.0.0",
-    "ts-jest": "24.2.*",
-    "typedoc": "0.15.*",
-    "typedoc-plugin-markdown": "2.2.*",
-    "typescript": "3.7.*"
+    "@types/jest": "25.*",
+    "@types/node": "^8.10.59",
+    "@typescript-eslint/eslint-plugin": "2.27.*",
+    "@typescript-eslint/parser": "2.27.*",
+    "eslint": "6.8.*",
+    "eslint-config-prettier": "6.10.*",
+    "eslint-plugin-jest": "23.8.*",
+    "eslint-plugin-json-format": "2.0.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "25.3.0",
+    "prettier": "2.0.*",
+    "rimraf": "^3.0.2",
+    "ts-jest": "25.3.*",
+    "typedoc": "0.17.*",
+    "typedoc-plugin-markdown": "^2.2.17",
+    "typescript": "3.8.*"
+  },
+  "engines": {
+    "node": ">=8"
   }
 }

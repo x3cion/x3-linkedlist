@@ -28,7 +28,7 @@ function getListWithItems(
   return {
     items,
     list,
-    values
+    values,
   };
 }
 
@@ -67,7 +67,7 @@ function getCallbackThisArgTest<K extends keyof Pick<LinkedList<string>, "every"
     let callbackBeenCalled1 = false;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     type Any = any;
-    (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function(this: typeof newThis1): void {
+    (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function (this: typeof newThis1): void {
       callbackBeenCalled1 = true;
       expect(this).toBe(newThis1);
       return;
@@ -77,7 +77,7 @@ function getCallbackThisArgTest<K extends keyof Pick<LinkedList<string>, "every"
 
     const newThis2 = -1;
     let callbackBeenCalled2 = false;
-    (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function(this: typeof newThis2): void {
+    (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function (this: typeof newThis2): void {
       callbackBeenCalled2 = true;
       expect(this).toBe(newThis2);
       return;
@@ -98,9 +98,9 @@ describe("Helper functions are working", () => {
     expect(givenValues.length).toBe(consistentLength);
     expect(list.length).toBe(consistentLength);
 
-    expect(expectedValues.every(value => expectedValues.includes(value))).toBe(true);
-    expect(items.every(item => expectedValues.includes(item.value))).toBe(true);
-    expect(list.every(value => expectedValues.includes(value))).toBe(true);
+    expect(expectedValues.every((value) => expectedValues.includes(value))).toBe(true);
+    expect(items.every((item) => expectedValues.includes(item.value))).toBe(true);
+    expect(list.every((value) => expectedValues.includes(value))).toBe(true);
   });
 
   test("getValueOnIndex returns the right value for given index", () => {
@@ -164,7 +164,7 @@ describe("LinkedList#filter", () => {
 
     const filteredValues = [...filteredList.values()];
     expect(filteredValues.length).toBe(allowedItems.size);
-    expect(filteredValues.every(value => allowedItems.has(value))).toBe(true);
+    expect(filteredValues.every((value) => allowedItems.has(value))).toBe(true);
   });
 
   test("returns empty LinkedList if callback never was truthy", () => {
@@ -186,7 +186,7 @@ describe("LinkedList#filter", () => {
 describe("LinkedList#find", () => {
   test("finds in LinkedList", () => {
     const { list } = getListWithItems(5);
-    const found = list.find(value => value === "3");
+    const found = list.find((value) => value === "3");
 
     expect(found).toBe("3");
   });
@@ -198,7 +198,7 @@ describe("LinkedList#find", () => {
 describe("LinkedList#findItem", () => {
   test("finds in LinkedList", () => {
     const { list, items } = getListWithItems(7);
-    const foundItem = list.findItem(value => value === "6");
+    const foundItem = list.findItem((value) => value === "6");
 
     expect(foundItem).toBe(items[6]);
   });
@@ -213,7 +213,7 @@ describe("LinkedList#forEach", () => {
 
     const forEachResponses = [true, false, {}, 5];
     let forEachRun = 0;
-    list.forEach(value => {
+    list.forEach((value) => {
       forEachRun++;
       expect(values.includes(value)).toBe(true);
       return forEachResponses[forEachRun];
@@ -294,9 +294,9 @@ describe("LinkedList#map", () => {
   test("maps for every item in list", () => {
     const { list } = getListWithItems(4);
     const expectedOutput = [1, 2, 3, 4];
-    const output = list.map(value => parseInt(value, 10) + 1);
+    const output = list.map((value) => parseInt(value, 10) + 1);
     expect(output.length).toBe(4);
-    expect(output.every(value => expectedOutput.includes(value))).toBe(true);
+    expect(output.every((value) => expectedOutput.includes(value))).toBe(true);
   });
 
   test("passes items and list as second and third argument", () => {
@@ -431,7 +431,7 @@ describe("LinkedList#some", () => {
   test("breaks as soon as a value has been found", () => {
     const { list } = getListWithItems(4);
     let iterationCount = 0;
-    const returnedValue = list.some(value => {
+    const returnedValue = list.some((value) => {
       iterationCount++;
       return value === "2";
     });
@@ -444,7 +444,7 @@ describe("LinkedList#some", () => {
     const { list } = getListWithItems(5);
     let iterationCount = 0;
 
-    const returnedValue = list.some(value => {
+    const returnedValue = list.some((value) => {
       iterationCount++;
       return value === "5";
     });
@@ -694,7 +694,7 @@ describe("LinkedList#keys", () => {
     const keyResponse = [...list.keys()];
 
     expect(keyResponse.length).toBe(4);
-    expect(keyResponse.every(item => items.includes(item))).toBe(true);
+    expect(keyResponse.every((item) => items.includes(item))).toBe(true);
   });
 
   test("returns nothing if list is empty", () => {
@@ -711,7 +711,7 @@ describe("LinkedList#values", () => {
 
     const valuesResponse = [...list.values()];
     expect(valuesResponse.length).toBe(4);
-    expect(valuesResponse.every(value => values.includes(value))).toBe(true);
+    expect(valuesResponse.every((value) => values.includes(value))).toBe(true);
   });
 
   test("returns nothing if list is empty", () => {

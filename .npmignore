@@ -1,5 +1,6 @@
 .github/
 .idea/
+.history/
 .nyc_output/
 .vscode/
 coverage/

@@ -26,7 +26,7 @@
     "build": "rimraf dist/ && tsc -p tsconfig.compile.json",
     "doc": "rimraf docs/typedoc && typedoc src/",
     "full": "npm run lint && npm run build && npm run test && npm run doc",
-    "lint": "eslint --fix '**/*'",
+    "lint": "eslint --fix \"**/*\"",
     "prepublishOnly": "npm run full",
     "test": "jest --coverage",
     "watch": "rimraf dist/ && tsc -p tsconfig.compile.json -w"

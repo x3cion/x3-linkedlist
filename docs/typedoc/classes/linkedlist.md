@@ -1,4 +1,4 @@
-[x3-linkedlist](../README.md) › [Globals](../globals.md) › [LinkedList](linkedlist.md)
+[x3-linkedlist](../README.md) › [LinkedList](linkedlist.md)
 
 # Class: LinkedList <**T**>
 
@@ -61,8 +61,6 @@ Type of values within this LinkedList
 
 \+ **new LinkedList**(`values?`: Iterable‹T› | [LinkedList](linkedlist.md)‹T›): *[LinkedList](linkedlist.md)*
 
-*Defined in [LinkedList.ts:22](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L22)*
-
 **Parameters:**
 
 Name | Type | Description |
@@ -77,8 +75,6 @@ Name | Type | Description |
 
 • **first**: *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedList.ts:11](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L11)*
-
 First item in list
 
 ___
@@ -87,8 +83,6 @@ ___
 
 • **last**: *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedList.ts:16](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L16)*
-
 Last item in list
 
 ___
@@ -96,8 +90,6 @@ ___
 ###  length
 
 • **length**: *number* = 0
-
-*Defined in [LinkedList.ts:22](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L22)*
 
 Current length of this LinkedList.
 Note that this does not work anymore if you for some reason add your own LinkedListItems to LinkedList by hand
@@ -108,8 +100,6 @@ Note that this does not work anymore if you for some reason add your own LinkedL
 
 ▸ **[Symbol.iterator]**(): *IterableIterator‹[[LinkedListItem](linkedlistitem.md)‹T›, T]›*
 
-*Defined in [LinkedList.ts:400](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L400)*
-
 Returns LinkedListItem and value for every entry of this LinkedList
 
 **Returns:** *IterableIterator‹[[LinkedListItem](linkedlistitem.md)‹T›, T]›*
@@ -119,8 +109,6 @@ ___
 ###  concat
 
 ▸ **concat**<**V**>(...`others`: Array‹V | [LinkedList](linkedlist.md)‹V››): *[LinkedList](linkedlist.md)‹V | T›*
-
-*Defined in [LinkedList.ts:293](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L293)*
 
 Concats given values and returns a new LinkedList with all given values.
 If LinkedList's are given, they will be spread.
@@ -145,8 +133,6 @@ ___
 
 ▸ **entries**(): *IterableIterator‹[[LinkedListItem](linkedlistitem.md)‹T›, T]›*
 
-*Defined in [LinkedList.ts:415](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L415)*
-
 Returns LinkedListItem and value for every entry of this LinkedList
 
 **`see`** LinkedList#Symbol.iterator
@@ -158,8 +144,6 @@ ___
 ###  every
 
 ▸ **every**<**C**>(`callback`: function, `thisArg?`: C): *boolean*
-
-*Defined in [LinkedList.ts:42](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L42)*
 
 As Array#every() given callback is called for every element until one call returns falsy or all elements had been processed
 
@@ -195,8 +179,6 @@ ___
 
 ▸ **filter**<**C**>(`callback`: function, `thisArg?`: C): *[LinkedList](linkedlist.md)‹T›*
 
-*Defined in [LinkedList.ts:60](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L60)*
-
 Filters values into a new LinkedList
 
 **`see`** Array#filter
@@ -230,8 +212,6 @@ ___
 ###  find
 
 ▸ **find**<**C**>(`callback`: function, `thisArg?`: C): *T | undefined*
-
-*Defined in [LinkedList.ts:79](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L79)*
 
 Returns value for which given callback returns truthy
 
@@ -267,8 +247,6 @@ ___
 
 ▸ **findItem**<**C**>(`callback`: function, `thisArg?`: C): *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedList.ts:96](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L96)*
-
 Returns the LinkedListItem for which given callback returns truthy
 
 **`see`** Array#findIndex
@@ -302,8 +280,6 @@ ___
 ###  forEach
 
 ▸ **forEach**<**C**>(`callback`: function, `thisArg?`: C): *void*
-
-*Defined in [LinkedList.ts:114](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L114)*
 
 Iterates this LinkedList's items and values
 
@@ -341,8 +317,6 @@ ___
 
 ▸ **getItemByIndex**(`index`: number): *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedList.ts:453](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L453)*
-
 Returns the item by given index.
 Supports negative values and will return the item at `LinkedList.size - 1 + index` in that case.
 
@@ -359,8 +333,6 @@ ___
 ###  includes
 
 ▸ **includes**(`value`: T, `fromIndex`: number): *boolean*
-
-*Defined in [LinkedList.ts:130](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L130)*
 
 Checks if value can be found within LinkedList, starting from fromIndex, if given.
 
@@ -383,8 +355,6 @@ ___
 
 ▸ **itemOf**(`searchedValue`: T, `fromIndex`: number): *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
 
-*Defined in [LinkedList.ts:147](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L147)*
-
 Searches forward for given value and returns the first corresponding LinkedListItem found
 
 **`see`** Array#indexOf
@@ -404,8 +374,6 @@ ___
 
 ▸ **join**(`separator?`: undefined | string): *string*
 
-*Defined in [LinkedList.ts:283](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L283)*
-
 Joins values within this by given separator. Uses Array#join directly.
 
 **`see`** Array#join
@@ -424,8 +392,6 @@ ___
 
 ▸ **keys**(): *IterableIterator‹[LinkedListItem](linkedlistitem.md)‹T››*
 
-*Defined in [LinkedList.ts:422](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L422)*
-
 Iterates the LinkedListItem's of this LinkedList
 
 **Returns:** *IterableIterator‹[LinkedListItem](linkedlistitem.md)‹T››*
@@ -435,8 +401,6 @@ ___
 ###  lastItemOf
 
 ▸ **lastItemOf**(`searchedValue`: T, `fromIndex`: number): *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
-
-*Defined in [LinkedList.ts:164](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L164)*
 
 Searches backwards for given value and returns the first corresponding LinkedListItem found
 
@@ -456,8 +420,6 @@ ___
 ###  map
 
 ▸ **map**<**V**, **C**>(`callback`: function, `thisArg?`: C): *[LinkedList](linkedlist.md)‹V›*
-
-*Defined in [LinkedList.ts:181](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L181)*
 
 Creates a new LinkedList with each of its itesm representing the output of the callback with each item in current LinkedList.
 
@@ -497,8 +459,6 @@ ___
 
 ▸ **pop**(): *T | undefined*
 
-*Defined in [LinkedList.ts:308](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L308)*
-
 Removes the last LinkedListItem and returns its inner value
 
 **Returns:** *T | undefined*
@@ -508,8 +468,6 @@ ___
 ###  push
 
 ▸ **push**(...`values`: T[]): *number*
-
-*Defined in [LinkedList.ts:321](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L321)*
 
 Adds given values on the end of this LinkedList
 
@@ -526,8 +484,6 @@ ___
 ###  reduce
 
 ▸ **reduce**<**V**>(`callback`: function): *V*
-
-*Defined in [LinkedList.ts:199](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L199)*
 
 From Array#reduce on MDN: The reduce() method executes a reducer function (that you provide) on each element of the LinkedList,
 resulting in a single output value.
@@ -559,8 +515,6 @@ Name | Type |
 
 ▸ **reduce**<**V**>(`callback`: function, `initialValue`: V): *V*
 
-*Defined in [LinkedList.ts:200](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L200)*
-
 **Type parameters:**
 
 ▪ **V**
@@ -590,8 +544,6 @@ ___
 
 ▸ **reduceRight**<**V**>(`callback`: function): *V*
 
-*Defined in [LinkedList.ts:231](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L231)*
-
 From Array#reduce on MDN: The reduceRight() method applies a function against an accumulator and each value of the LinkedList (from last-to-first)
 to reduce it to a single value.
 
@@ -619,8 +571,6 @@ Name | Type |
 **Returns:** *V*
 
 ▸ **reduceRight**<**V**>(`callback`: function, `initialValue`: V): *V*
-
-*Defined in [LinkedList.ts:232](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L232)*
 
 **Type parameters:**
 
@@ -651,8 +601,6 @@ ___
 
 ▸ **remove**(`value`: T): *boolean*
 
-*Defined in [LinkedList.ts:357](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L357)*
-
 Removes first occurrence of value found.
 
 **Parameters:**
@@ -668,8 +616,6 @@ ___
 ###  removeAllOccurrences
 
 ▸ **removeAllOccurrences**(`value`: T): *boolean*
-
-*Defined in [LinkedList.ts:372](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L372)*
 
 Removes every occurrance of value within this.
 
@@ -687,8 +633,6 @@ ___
 
 ▸ **shift**(): *T | undefined*
 
-*Defined in [LinkedList.ts:388](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L388)*
-
 Returns and removes first element from LinkedList
 
 **Returns:** *T | undefined*
@@ -698,8 +642,6 @@ ___
 ###  some
 
 ▸ **some**<**C**>(`callback`: function, `thisArg?`: C): *boolean*
-
-*Defined in [LinkedList.ts:266](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L266)*
 
 Runs callback for every entry and returns true immediately if call of callback returns truthy.
 
@@ -737,8 +679,6 @@ ___
 
 ▸ **unlinkCleanup**(`item`: [LinkedListItem](linkedlistitem.md)‹T›): *void*
 
-*Defined in [LinkedList.ts:485](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L485)*
-
 Given to own LinkedListItem's for following jobs regarding an unlink:
 - If item is first item, set the next item as first item
 - If item is last item, set the previous item as last item
@@ -758,8 +698,6 @@ ___
 
 ▸ **unshift**(...`values`: T[]): *number*
 
-*Defined in [LinkedList.ts:339](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L339)*
-
 Adds given values to the beginning of this LinkedList
 
 **Parameters:**
@@ -775,8 +713,6 @@ ___
 ###  values
 
 ▸ **values**(): *IterableIterator‹T›*
-
-*Defined in [LinkedList.ts:436](https://github.com/x3cion/x3-linkedlist/blob/ff2b20f/src/LinkedList.ts#L436)*
 
 Returns a value for every entry of this LinkedList
 

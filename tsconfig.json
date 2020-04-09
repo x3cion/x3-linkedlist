@@ -32,6 +32,8 @@
     ],
     "mode": "file",
     "out": "docs/typedoc",
-    "theme": "markdown"
+    "disableSources": true,
+    "theme": "markdown",
+    "readme": "none"
   }
 }

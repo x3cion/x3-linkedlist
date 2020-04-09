@@ -29,6 +29,7 @@ Type of values within this LinkedList
 ### Methods
 
 * [[Symbol.iterator]](linkedlist.md#[symbol.iterator])
+* [clear](linkedlist.md#clear)
 * [concat](linkedlist.md#concat)
 * [entries](linkedlist.md#entries)
 * [every](linkedlist.md#every)
@@ -103,6 +104,28 @@ Note that this does not work anymore if you for some reason add your own LinkedL
 Returns LinkedListItem and value for every entry of this LinkedList
 
 **Returns:** *IterableIterator‹[[LinkedListItem](linkedlistitem.md)‹T›, T]›*
+
+___
+
+###  clear
+
+▸ **clear**(`unchain`: boolean): *void*
+
+Clears this LinkedList.
+The default complexity is O(1), because it only removes links to the first and last item and resets the length.
+Note that if any LinkedListItem is still referenced outside the LinkedList, their before and behind fields might
+still reference the chain, not freeing space.
+You can set the unchain parameter to true, so every item in the linked list will be unchained,
+meaning all references to before and behind items will be removed.
+This increases complexity to O(n), but removes accidental outside references to the full chain.
+
+**Parameters:**
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`unchain` | boolean | false | If `true`, remove link info from every item. Changes complexity to O(n)!  |
+
+**Returns:** *void*
 
 ___
 

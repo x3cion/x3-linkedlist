@@ -51,9 +51,10 @@ export class LinkedListItem<T> {
 
   /**
    * Unlinks this LinkedListItem and calls unlinkCleanup
+   * @param unchain If true, additionally removes the reference to the item before and behind
    * @see LinkedListItem#unlinkCleanup
    */
-  public unlink(): void {
+  public unlink(unchain = false): void {
     if (this.before) this.before.behind = this.behind;
 
     if (this.behind) {
@@ -63,6 +64,10 @@ export class LinkedListItem<T> {
       this.unlinkCleanup(this);
     }
     this.unlinkCleanup = undefined;
+
+    if (unchain) {
+      this.before = this.behind = undefined;
+    }
   }
 
   /**

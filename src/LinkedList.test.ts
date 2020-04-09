@@ -128,6 +128,37 @@ describe("LinkedList#constructor", () => {
   });
 });
 
+describe("LinkedList#clear", () => {
+  test("removes first item", () => {
+    const { list } = getListWithItems(3);
+    list.clear();
+    expect(list.first).toBeUndefined();
+  });
+
+  test("removes last item", () => {
+    const { list } = getListWithItems(3);
+    list.clear();
+    expect(list.last).toBeUndefined();
+  });
+
+  test("resets length", () => {
+    const { list } = getListWithItems(3);
+    list.clear();
+    expect(list.length).toBe(0);
+  });
+
+  test("properly unchains if unchain = true", () => {
+    const { list } = getListWithItems(3);
+    const item = list.first?.behind as LinkedListItem<unknown>;
+    expect(item).toBeDefined();
+    expect(item.before).toBeDefined();
+    expect(item.behind).toBeDefined();
+    list.clear(true);
+    expect(item.before).toBeUndefined();
+    expect(item.behind).toBeUndefined();
+  });
+});
+
 describe("LinkedList#every", () => {
   test("iterates for every element as long as a truthy value is returned", () => {
     const { list } = getListWithItems(3);

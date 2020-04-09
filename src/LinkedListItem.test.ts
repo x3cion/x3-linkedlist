@@ -86,6 +86,20 @@ describe("LinkedListItem#unlink", () => {
     expect(item2.behind).toBe(item3);
   });
 
+  test("removes the chain info from item if asked to do so", () => {
+    const item1 = new LinkedListItem(1);
+    const item2 = new LinkedListItem(2);
+    const item3 = new LinkedListItem(3);
+
+    item1.insertBehind(item2);
+    item2.insertBehind(item3);
+
+    item2.unlink(true);
+
+    expect(item2.before).toBeUndefined();
+    expect(item2.behind).toBeUndefined();
+  });
+
   test("runs given unlinkCleanup function", () => {
     let called = false;
     const item1 = new LinkedListItem(1, (): void => {

@@ -126,10 +126,16 @@ ___
 
 ###  unlink
 
-▸ **unlink**(): *void*
+▸ **unlink**(`unchain`: boolean): *void*
 
 Unlinks this LinkedListItem and calls unlinkCleanup
 
 **`see`** LinkedListItem#unlinkCleanup
+
+**Parameters:**
+
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`unchain` | boolean | false | If true, additionally removes the reference to the item before and behind |
 
 **Returns:** *void*

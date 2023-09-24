@@ -1,141 +1,175 @@
-[x3-linkedlist](../README.md) › [LinkedListItem](linkedlistitem.md)
+[x3-linkedlist](../README.md) / LinkedListItem
 
-# Class: LinkedListItem <**T**>
+# Class: LinkedListItem<T\>
 
 Represents an Item within LinkedList.
 An item holds a value and the links to other LinkedListItem's
 LinkedListItem's can only be attached behind.
 Theirfor, to add one before, before has to add one behind.
 
+**`Typeparam`**
+
+T - Type of the vaulue in this LinkedListItem
+
 ## Type parameters
 
-▪ **T**
+| Name |
+| :------ |
+| `T` |
 
-## Hierarchy
-
-* **LinkedListItem**
-
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](linkedlistitem.md#constructor)
+- [constructor](LinkedListItem.md#constructor)
 
 ### Properties
 
-* [before](linkedlistitem.md#before)
-* [behind](linkedlistitem.md#behind)
-* [unlinkCleanup](linkedlistitem.md#protected-optional-unlinkcleanup)
-* [value](linkedlistitem.md#value)
+- [before](LinkedListItem.md#before)
+- [behind](LinkedListItem.md#behind)
+- [unlinkCleanup](LinkedListItem.md#unlinkcleanup)
+- [value](LinkedListItem.md#value)
 
 ### Methods
 
-* [insertBefore](linkedlistitem.md#protected-insertbefore)
-* [insertBehind](linkedlistitem.md#insertbehind)
-* [unlink](linkedlistitem.md#unlink)
+- [insertBefore](LinkedListItem.md#insertbefore)
+- [insertBehind](LinkedListItem.md#insertbehind)
+- [unlink](LinkedListItem.md#unlink)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new LinkedListItem**(`value`: T, `unlinkCleanup?`: undefined | function): *[LinkedListItem](linkedlistitem.md)*
+• **new LinkedListItem**<`T`\>(`value`, `unlinkCleanup?`)
 
-**Parameters:**
+#### Type parameters
 
-Name | Type | Description |
------- | ------ | ------ |
-`value` | T | Value to be held |
-`unlinkCleanup?` | undefined &#124; function | Function to run on unlink() call. Usually used by LinkedList to fix first and last pointers and reduce length.  |
+| Name |
+| :------ |
+| `T` |
 
-**Returns:** *[LinkedListItem](linkedlistitem.md)*
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `value` | `T` | Value of this item |
+| `unlinkCleanup?` | (`item`: [`LinkedListItem`](LinkedListItem.md)<`T`\>) => `void` | Function to run on unlink() call. Usually used by LinkedList to fix first and last pointers and reduce length. |
 
 ## Properties
 
-###  before
+### before
 
-• **before**: *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
+• **before**: `undefined` \| [`LinkedListItem`](LinkedListItem.md)<`T`\>
 
 Item before this item
+```
 A -> ThisItem -> C
 ^
+```
 
 ___
 
-###  behind
+### behind
 
-• **behind**: *[LinkedListItem](linkedlistitem.md)‹T› | undefined*
+• **behind**: `undefined` \| [`LinkedListItem`](LinkedListItem.md)<`T`\>
 
 Item behind this item
+```
 A -> ThisItem -> C
                  ^
+```
 
 ___
 
-### `Protected` `Optional` unlinkCleanup
+### unlinkCleanup
 
-• **unlinkCleanup**? : *undefined | function*
+• `Protected` `Optional` **unlinkCleanup**: (`item`: [`LinkedListItem`](LinkedListItem.md)<`T`\>) => `void`
+
+#### Type declaration
+
+▸ (`item`): `void`
 
 Function to run on unlink() call. Usually used by LinkedList to fix first and last pointers and reduce length.
 
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `item` | [`LinkedListItem`](LinkedListItem.md)<`T`\> |
+
+##### Returns
+
+`void`
+
 ___
 
-###  value
+### value
 
-• **value**: *T*
+• **value**: `T`
 
-Value to be held
+Value of this item
 
 ## Methods
 
-### `Protected` insertBefore
+### insertBefore
 
-▸ **insertBefore**(`before`: [LinkedListItem](linkedlistitem.md)‹T›): *void*
+▸ `Protected` **insertBefore**(`before`): `void`
 
 Item given will be inserted before this item.
 unlinkCleanup will be copied if neccessary.
 This function is protected, because LinkedListItem's can only be attached behind.
 
-**`see`** insertBehind
+#### Parameters
 
-**Parameters:**
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `before` | [`LinkedListItem`](LinkedListItem.md)<`T`\> | LinkListItem to be inserted before this one |
 
-Name | Type |
------- | ------ |
-`before` | [LinkedListItem](linkedlistitem.md)‹T› |
+#### Returns
 
-**Returns:** *void*
+`void`
+
+**`See`**
+
+insertBehind
 
 ___
 
-###  insertBehind
+### insertBehind
 
-▸ **insertBehind**(`item`: [LinkedListItem](linkedlistitem.md)‹T›): *void*
+▸ **insertBehind**(`item`): `void`
 
 This will link given LinkListItem behind this item.
 If there's already a LinkedListItem linked behind, it will be relinked accordingly
 
-**Parameters:**
+#### Parameters
 
-Name | Type | Description |
------- | ------ | ------ |
-`item` | [LinkedListItem](linkedlistitem.md)‹T› | LinkListItem to be inserted behind this one  |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `item` | [`LinkedListItem`](LinkedListItem.md)<`T`\> | LinkListItem to be inserted behind this one |
 
-**Returns:** *void*
+#### Returns
+
+`void`
 
 ___
 
-###  unlink
+### unlink
 
-▸ **unlink**(`unchain`: boolean): *void*
+▸ **unlink**(`unchain?`): `void`
 
 Unlinks this LinkedListItem and calls unlinkCleanup
 
-**`see`** LinkedListItem#unlinkCleanup
+#### Parameters
 
-**Parameters:**
+| Name | Type | Default value | Description |
+| :------ | :------ | :------ | :------ |
+| `unchain` | `boolean` | `false` | If true, additionally removes the reference to the item before and behind |
 
-Name | Type | Default | Description |
------- | ------ | ------ | ------ |
-`unchain` | boolean | false | If true, additionally removes the reference to the item before and behind |
+#### Returns
 
-**Returns:** *void*
+`void`
+
+**`See`**
+
+LinkedListItem#unlinkCleanup

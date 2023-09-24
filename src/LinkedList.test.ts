@@ -8,7 +8,7 @@ import { LinkedListItem } from "./LinkedListItem";
  */
 function getListWithItems(
   count: number,
-  offset = 0
+  offset = 0,
 ): {
   list: LinkedList<string>;
   items: Array<LinkedListItem<string>>;
@@ -58,7 +58,7 @@ function getValueOnIndex<T>(list: LinkedList<T>, index: number): T {
 
 function getCallbackThisArgTest<K extends keyof Pick<LinkedList<string>, "every" | "some" | "filter" | "find" | "findItem" | "forEach" | "map">>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  targetedFunction: K
+  targetedFunction: K,
 ): () => void {
   return (): void => {
     const { list } = getListWithItems(1);
@@ -378,7 +378,7 @@ describe("LinkedList#reduce", () => {
     expect(() =>
       list.reduce(() => {
         return;
-      })
+      }),
     ).toThrowError(TypeError);
   });
 
@@ -430,7 +430,7 @@ describe("LinkedList#reduceRight", () => {
     expect(() =>
       list.reduceRight(() => {
         return;
-      })
+      }),
     ).toThrowError(TypeError);
   });
 

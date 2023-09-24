@@ -6,9 +6,12 @@
 	"eslint.validate": ["typescript", "javascript", "json", "jsonc"],
 	"eslint.probe": ["typescript", "javascript", "json", "jsonc"],
 	"files.autoSave": "off",
-	"editor.formatOnSave": false,
+	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "dbaeumer.vscode-eslint",
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": true
+	},
+	"[github-actions-workflow]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

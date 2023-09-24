@@ -1,10 +1,10 @@
-[x3-linkedlist](README.md)
+x3-linkedlist
 
 # x3-linkedlist
 
-## Index
+## Table of contents
 
 ### Classes
 
-* [LinkedList](classes/linkedlist.md)
-* [LinkedListItem](classes/linkedlistitem.md)
+- [LinkedList](classes/LinkedList.md)
+- [LinkedListItem](classes/LinkedListItem.md)

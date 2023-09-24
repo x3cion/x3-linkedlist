@@ -32,24 +32,24 @@
     "watch": "rimraf dist/ && tsc -p tsconfig.compile.json -w"
   },
   "devDependencies": {
-    "@types/jest": "25.*",
-    "@types/node": "10.*",
-    "@typescript-eslint/eslint-plugin": "2.27.*",
-    "@typescript-eslint/parser": "2.27.*",
-    "eslint": "6.8.*",
-    "eslint-config-prettier": "6.10.*",
-    "eslint-plugin-jest": "23.8.*",
-    "eslint-plugin-json-format": "2.0.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "jest": "25.3.0",
-    "prettier": "2.0.*",
-    "rimraf": "^3.0.2",
-    "ts-jest": "25.3.*",
-    "typedoc": "0.17.*",
-    "typedoc-plugin-markdown": "^2.2.17",
-    "typescript": "3.8.*"
+    "@types/jest": "^29.5.5",
+    "@types/node": "^16",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.4.0",
+    "eslint-plugin-jsonc": "^2.9.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "rimraf": "^5.0.1",
+    "ts-jest": "^29.1.1",
+    "typedoc": "^0.25.1",
+    "typedoc-plugin-markdown": "^3.16.0",
+    "typescript": "^5.2.2"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   }
 }

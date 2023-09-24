@@ -1,28 +1,28 @@
 {
-  "extends": [
-		"eslint:recommended", "plugin:prettier/recommended", "prettier/standard"],
-  "plugins": ["prettier"],
+  "extends": ["eslint:recommended", "plugin:jsonc/recommended-with-jsonc", "plugin:prettier/recommended"],
   "rules": {
-    "prettier/prettier": ["error", {
-      "printWidth": 150
-    }] 
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 150
+      }
+    ]
   },
   "env": {
     "es6": true,
-	  "node": true
+    "node": true
   },
   "overrides": [
     {
       "files": ["*.ts"],
-      "extends": ["plugin:@typescript-eslint/recommended", "prettier/@typescript-eslint"],
+      "extends": ["plugin:@typescript-eslint/recommended"],
       "plugins": ["@typescript-eslint"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": "./tsconfig.json",
-        "ecmaVersion": 8
+        "project": "./tsconfig.json"
       },
-      "rules":{
-        "no-dupe-class-members":"off"
+      "rules": {
+        "no-dupe-class-members": "off"
       }
     },
     {
@@ -30,17 +30,6 @@
       "plugins": ["jest"],
       "env": {
         "jest/globals": true
-      }
-    },
-    {
-      "files": ["*.js"],
-      "env": {"node": true}
-    },
-    {
-      "files": ["*.json"],
-      "plugins": ["json-format"],
-      "settings": {
-        "json/json-with-comments-files": []
       }
     }
   ]

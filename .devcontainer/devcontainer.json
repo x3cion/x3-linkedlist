@@ -1,0 +1,66 @@
+{
+  // Dev Container Configuration for x3-linkedlist
+  // Includes Node.js 22, TypeScript tooling, pnpm, and Claude Code
+  
+  "name": "x3-linkedlist Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Code Quality & Formatting
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        
+        // TypeScript Support
+        "ms-vscode.vscode-typescript-next",
+        
+        // Documentation & Writing
+        "streetsidesoftware.code-spell-checker",
+        "yzhang.markdown-all-in-one",
+        
+        // Git Tools
+        "eamodio.gitlens",
+        
+        // AI Coding Assistant
+        "anthropic.claude-code"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "typescript.preferences.importModuleSpecifier": "relative",
+        
+        // pnpm settings
+        "npm.packageManager": "pnpm",
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+
+  // Enable corepack, install dependencies with pnpm, and install Claude Code CLI
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@latest --activate && pnpm install && pnpm add -g @anthropic-ai/claude-code",
+
+  "forwardPorts": [],
+
+  "remoteUser": "node",
+
+  // Sync local git config into container
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,type=bind,consistency=cached"
+  ],
+
+  // Optional: Set up Claude API key as environment variable
+  // Add ANTHROPIC_API_KEY to your Codespace secrets for automatic authentication
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}"
+  }
+}

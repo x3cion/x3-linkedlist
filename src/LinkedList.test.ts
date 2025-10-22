@@ -57,7 +57,6 @@ function getValueOnIndex<T>(list: LinkedList<T>, index: number): T {
 }
 
 function getCallbackThisArgTest<K extends keyof Pick<LinkedList<string>, "every" | "some" | "filter" | "find" | "findItem" | "forEach" | "map">>(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   targetedFunction: K,
 ): () => void {
   return (): void => {
@@ -379,7 +378,7 @@ describe("LinkedList#reduce", () => {
       list.reduce(() => {
         return;
       }),
-    ).toThrowError(TypeError);
+    ).toThrow(TypeError);
   });
 
   test("with empty LinkedList and initialValue, return initialValue", () => {
@@ -431,7 +430,7 @@ describe("LinkedList#reduceRight", () => {
       list.reduceRight(() => {
         return;
       }),
-    ).toThrowError(TypeError);
+    ).toThrow(TypeError);
   });
 
   test("with empty LinkedList and initialValue, return initialValue", () => {
@@ -542,7 +541,7 @@ describe("LinkedList#concat", () => {
     expect(joinedList1.first.value).toBe(list1.first.value);
 
     // the last element of the joined list holds the value of the last element of the third list
-    expect((joinedList1.last as LinkedListItem<string>).value).toBe((list3.last as LinkedListItem<string>).value);
+    expect(joinedList1.last.value).toBe(list3.last.value);
 
     // Includes 11, which is the second element from the second list
     expect(joinedList1.includes("11")).toBe(true);

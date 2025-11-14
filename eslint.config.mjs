@@ -14,7 +14,9 @@ export default tseslint.config(
     extends: tseslint.configs.recommendedTypeChecked,
     languageOptions: {
       parserOptions: {
-        project: "./tsconfig.eslint.json",
+        projectService: {
+          allowDefaultProject: ["*.config.mjs"],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -27,7 +29,9 @@ export default tseslint.config(
     extends: tseslint.configs.recommendedTypeChecked,
     languageOptions: {
       parserOptions: {
-        project: "./tsconfig.eslint.json",
+        projectService: {
+          allowDefaultProject: ["*.config.mjs"],
+        },
         tsconfigRootDir: import.meta.dirname,
       },
     },

@@ -1,5 +1,5 @@
-import { LinkedList } from "./LinkedList";
-import { LinkedListItem } from "./LinkedListItem";
+import { LinkedList } from "./LinkedList.js";
+import { LinkedListItem } from "./LinkedListItem.js";
 
 /**
  * Returns a LinkedList, the corresponding LinkedListItem's and an array of every value

@@ -64,7 +64,7 @@ function getCallbackThisArgTest<K extends keyof Pick<LinkedList<string>, "every"
 
     const newThis1 = { testvalue: 1 };
     let callbackBeenCalled1 = false;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     type Any = any;
     (list[targetedFunction] as (cb: (...arg: Any[]) => Any, thisArg: Any) => Any)(function (this: typeof newThis1): void {
       callbackBeenCalled1 = true;

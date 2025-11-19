@@ -10,13 +10,12 @@ export default tseslint.config(
   },
   eslint.configs.recommended,
   {
-    files: ["**/*.ts"],
+    files: ["src/**/*.ts"],
+    ignores: ["src/**/*.test.ts"],
     extends: tseslint.configs.recommendedTypeChecked,
     languageOptions: {
       parserOptions: {
-        projectService: {
-          allowDefaultProject: ["*.config.mjs"],
-        },
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -25,21 +24,16 @@ export default tseslint.config(
     },
   },
   {
-    files: ["**/*.test.ts"],
-    extends: tseslint.configs.recommendedTypeChecked,
+    files: ["src/**/*.test.ts"],
+    extends: [...tseslint.configs.recommended, jest.configs["flat/recommended"]],
     languageOptions: {
-      parserOptions: {
-        projectService: {
-          allowDefaultProject: ["*.config.mjs"],
-        },
-        tsconfigRootDir: import.meta.dirname,
-      },
+      parser: tseslint.parser,
     },
-    ...jest.configs["flat/recommended"],
     rules: {
       ...jest.configs["flat/recommended"].rules,
       "jest/prefer-expect-assertions": "off",
       "no-dupe-class-members": "off",
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
   ...jsonc.configs["flat/recommended-with-jsonc"],

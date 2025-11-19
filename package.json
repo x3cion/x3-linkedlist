@@ -21,36 +21,25 @@
   "license": "MIT",
   "author": "Benno Dreißig",
   "type": "module",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/esm/index.js"
-      },
-      "require": {
-        "types": "./dist/types/index.d.ts",
-        "default": "./dist/cjs/index.js"
-      }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "npm run build:clean && npm run build:cjs && npm run build:esm && npm run build:types",
-    "build:clean": "rimraf dist/",
-    "build:cjs": "tsc -p tsconfig.cjs.json && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:types": "tsc -p tsconfig.types.json",
+    "build": "rimraf dist/ && tsc",
     "doc": "rimraf docs/typedoc && typedoc src/",
     "full": "npm run lint && npm run build && npm run test && npm run doc",
     "lint": "eslint --fix .",
     "prepublishOnly": "npm run full",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
-    "watch": "tsc -p tsconfig.esm.json -w"
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "@eslint/js": "^9.16.0",

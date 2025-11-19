@@ -2,6 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "lib": ["ES2020"],
     "module": "NodeNext",
@@ -19,7 +20,12 @@
     "isolatedModules": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["src/**/*.test.ts", "node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "typedocOptions": {
     "plugin": "typedoc-plugin-markdown",
     "exclude": ["**/*.test.ts"],

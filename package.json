@@ -27,6 +27,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./LinkedList": {
+      "types": "./dist/LinkedList.d.ts",
+      "default": "./dist/LinkedList.js"
+    },
+    "./LinkedListItem": {
+      "types": "./dist/LinkedListItem.d.ts",
+      "default": "./dist/LinkedListItem.js"
     }
   },
   "files": [

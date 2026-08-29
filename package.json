@@ -43,9 +43,9 @@
   "scripts": {
     "build": "rimraf dist/ && tsc",
     "doc": "rimraf docs/typedoc && typedoc src/",
-    "full": "npm run lint && npm run build && npm run test && npm run doc",
+    "full": "pnpm run lint && pnpm run build && pnpm run test && pnpm run doc",
     "lint": "eslint --fix .",
-    "prepublishOnly": "npm run full",
+    "prepublishOnly": "pnpm run full",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
     "watch": "tsc -w"
   },

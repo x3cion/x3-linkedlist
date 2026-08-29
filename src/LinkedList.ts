@@ -1,4 +1,4 @@
-import { LinkedListItem } from "./LinkedListItem";
+import { LinkedListItem } from "./LinkedListItem.js";
 
 /**
  * Implements a linked list structure
